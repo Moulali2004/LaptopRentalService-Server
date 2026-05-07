@@ -2,10 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const connectDB = require('./connection/connection');
 const cookieParser = require('cookie-parser');
-const User = require('./models/users');
 
 //Routes
 const userRoutes = require('./routes/user');
+const laptopRoutes = require('./routes/laptop');
 
 const app = express();
 const port = 3000;
@@ -17,6 +17,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use('/api/auth', userRoutes);
+app.use('/api/laptop', laptopRoutes);
 
 app.listen(port, () => {
     console.log(`Server is up and running at port: ${port}`);
