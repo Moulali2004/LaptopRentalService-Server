@@ -25,7 +25,7 @@ function handleAddLaptop(req, res) {
 async function handleGetActiveLaptops(req, res) {
     try {
         const activeLaptops = await Laptop.find({ isActive: true });
-        res.status(200).json({ laptops: activeLaptops });
+        res.status(200).json({ laptops: { activeLaptops } });
     } catch(err) {
         console.log(err);
         res.status(500).json({ error: err });
