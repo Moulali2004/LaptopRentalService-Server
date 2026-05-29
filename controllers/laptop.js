@@ -25,7 +25,21 @@ function handleAddLaptop(req, res) {
 async function handleGetActiveLaptops(req, res) {
     try {
         const activeLaptops = await Laptop.find({ isActive: true });
-        res.status(200).json({ laptops: { activeLaptops } });
+        res.status(200).json({ activeLaptops });
+    } catch(err) {
+        console.log(err);
+        res.status(500).json({ error: err });
+    }
+}
+
+async function handleGetLaptopById(req, res) {
+    const laptopId = req.params.id;
+    try {
+        const laptop = await Laptop.findById(laptopId);
+        if(!laptop) {
+            res.status(404).json({ message: "Laptop not found" });
+        }
+        res.status(200).json({ laptop });
     } catch(err) {
         console.log(err);
         res.status(500).json({ error: err });
@@ -35,4 +49,5 @@ async function handleGetActiveLaptops(req, res) {
 module.exports = {
     handleAddLaptop,
     handleGetActiveLaptops,
+    handleGetLaptopById,
 }
